@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rhythm Funkin' — Auto-Sync Rhythm Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- UPLOAD SCREEN -->
+<div id="screen-upload" class="screen active">
+  <h1 class="logo">RHYTHM <span>FUNKIN'</span></h1>
+  <p class="tagline">Drop in any song. We'll build the chart.</p>
+  <div id="dropzone">
+    <div class="dz-arrow">⬆</div>
+    <p><strong>Drag &amp; drop a song here</strong></p>
+    <p class="dz-sub">or</p>
+    <button id="browse-btn" class="btn">Browse files</button>
+    <p class="dz-formats">mp3 · ogg · wav · m4a · flac</p>
+  </div>
+  <input type="file" id="file-input" accept="audio/*" hidden>
+</div>
+
+<!-- ANALYZING SCREEN -->
+<div id="screen-analyzing" class="screen">
+  <h2 id="analyzing-title">Listening to your song…</h2>
+  <div class="progress-track"><div id="analyze-bar" class="progress-fill"></div></div>
+  <p id="analyze-status" class="dim">Decoding audio…</p>
+</div>
+
+<!-- READY / DIFFICULTY SCREEN -->
+<div id="screen-ready" class="screen">
+  <h2 id="song-title" class="song-title"></h2>
+  <p id="song-meta" class="dim"></p>
+  <h3 class="pick-diff">Pick your difficulty</h3>
+  <div class="diff-row">
+    <button class="btn diff easy"   data-diff="easy">EASY</button>
+    <button class="btn diff normal" data-diff="normal">NORMAL</button>
+    <button class="btn diff hard"   data-diff="hard">HARD</button>
+  </div>
+  <p class="controls-hint">Controls: ← ↓ ↑ → &nbsp;or&nbsp; D F J K &nbsp;·&nbsp; ESC to pause</p>
+  <button id="back-btn" class="btn ghost">← Different song</button>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="screen-game" class="screen">
+  <canvas id="game-canvas"></canvas>
+  <div id="hud">
+    <div id="hud-left">
+      <div id="hud-song" class="hud-line"></div>
+      <div id="hud-diff" class="hud-line"></div>
+    </div>
+    <div id="hud-right">
+      <div id="hud-score" class="hud-line">Score: 0</div>
+      <div id="hud-acc" class="hud-line">Accuracy: —</div>
+    </div>
+  </div>
+  <div id="health-wrap"><div id="health-bar"></div></div>
+  <div id="song-progress-wrap"><div id="song-progress"></div></div>
+
+  <div id="pause-overlay" class="hidden">
+    <h2>PAUSED</h2>
+    <button id="resume-btn" class="btn">Resume</button>
+    <button id="pause-restart-btn" class="btn">Restart</button>
+    <button id="quit-btn" class="btn ghost">Quit to menu</button>
+    <div class="offset-row">
+      <label for="offset-slider">Audio offset: <span id="offset-value">0</span> ms</label>
+      <input type="range" id="offset-slider" min="-200" max="200" step="5" value="0">
+      <p class="dim small">Notes feel late? Move right. Early? Move left.</p>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div id="screen-results" class="screen">
+  <h2 id="results-heading">SONG CLEAR!</h2>
+  <div id="grade-badge">S</div>
+  <div id="results-stats"></div>
+  <div class="diff-row">
+    <button id="results-retry-btn" class="btn">Play again</button>
+    <button id="results-menu-btn" class="btn ghost">New song</button>
+  </div>
+</div>
+
+<!-- GAME OVER SCREEN -->
+<div id="screen-gameover" class="screen">
+  <h2 class="dead-title">YOU GOT COOKED</h2>
+  <p class="dim">The song was too powerful… this time.</p>
+  <div class="diff-row">
+    <button id="gameover-retry-btn" class="btn">Try again</button>
+    <button id="gameover-menu-btn" class="btn ghost">New song</button>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
